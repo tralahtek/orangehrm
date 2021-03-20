@@ -1,8 +1,9 @@
 /**
-* @api {get} /leave/search 7.Search Leave Requests
+* @api {get} /leave/search 07.Search Leave Requests
 * @apiName searchLeaveRequest
 * @apiGroup Leave
 * @apiVersion 0.1.0
+* @apiUse AdminDescription
 *
 *
 * @apiParam {Date}  fromDate From date.
@@ -14,6 +15,8 @@
 * @apiParam {String}  [taken] Leave status taken ( 'true' / 'false' ).
 * @apiParam {String}  [pastEmployee] Past employee results ( 'true' /'false').
 * @apiParam {Number}  [subunit] Employee subunit id.
+* @apiParam {Number}  [page] Page number
+* @apiParam {Number}  [limit] Leave record limit
 *
 * @apiSuccess {String} employeeName Employee name
 * @apiSuccess {String} employeeId Employee id.
@@ -66,14 +69,14 @@
 *                "status": "SCHEDULED",
 *                "type": "Short Leave",
 *                "duration": "8.00",
-*                "comments": ""
+*                "comments": []
 *            },
 *            {
 *                "date": "2017-05-24",
 *                "status": "SCHEDULED",
 *                "type": "Short Leave",
 *                "duration": "8.00",
-*                "comments": ""
+*                "comments": []
 *            }
 *                ]
 *

@@ -30,11 +30,13 @@
     "respect/validation": "1.1.11",
     "psr/log": "^1.0",
     "google/apiclient": "^2.0",
-    "bjeavons/zxcvbn-php": "^0.3"
+    "bjeavons/zxcvbn-php": "^0.3",
+    "bshaffer/oauth2-server-php": "^1.11"
   },
   "require-dev": {
     "codeception/codeception": "^2.2",
-    "phpunit/phpunit": "^5.7"
+    "phpunit/phpunit": "^5.7",
+    "zircote/swagger-php": "^3.0"
   },
   "extra": {
     "installer-types": ["library"],

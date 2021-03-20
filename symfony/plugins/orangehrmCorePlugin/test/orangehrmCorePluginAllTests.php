@@ -40,6 +40,7 @@ class orangehrmCorePluginAllTests {
         $suite->addTestFile(dirname(__FILE__) . '/components/ohrmCellFilterTest.php');
         $suite->addTestFile(dirname(__FILE__) . '/components/EnumCellFilterTest.php');
         $suite->addTestFile(dirname(__FILE__) . '/components/CellTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/components/TextareaCellTest.php');
         
         /* Dao Test Cases */
         $suite->addTestFile(dirname(__FILE__) . '/dao/ConfigDaoTest.php');
@@ -92,6 +93,30 @@ class orangehrmCorePluginAllTests {
         $suite->addTestFile(dirname(__FILE__) . '/authorization/service/MenuServiceTest.php');
 
         $suite->addTestFile(dirname(__FILE__) . '/utility/Base64UrlTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/utility/NumberUtilityTest.php');
+
+        /* ohrmWidgets */
+        $suite->addTestFile(dirname(__FILE__) . '/ohrmWidgets/ohrmWidgetTraitTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/ohrmWidgets/ohrmWidgetProjectListTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/ohrmWidgets/ohrmReportWidgetAgeGroupTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/ohrmWidgets/ohrmReportWidgetEducationtypeDropDownTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/ohrmWidgets/ohrmReportWidgetEmployeeListAutoFillTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/ohrmWidgets/ohrmReportWidgetJoinedDateTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/ohrmWidgets/ohrmReportWidgetLanguageDropDownTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/ohrmWidgets/ohrmReportWidgetLocationDropDownTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/ohrmWidgets/ohrmReportWidgetOperationalCountryLocationDropDownTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/ohrmWidgets/ohrmReportWidgetPayGradeDropDownTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/ohrmWidgets/ohrmReportWidgetServicePeriodTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/ohrmWidgets/ohrmReportWidgetSkillDropDownTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/ohrmWidgets/ohrmWidgetJobTitleListTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/ohrmWidgets/ohrmWidgetProjectListWithAllOptionTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/ohrmWidgets/ohrmWidgetProjectActivityListTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/ohrmWidgets/ohrmWidgetEmploymentStatusListTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/ohrmWidgets/ohrmWidgetSubDivisionListTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/ohrmWidgets/ohrmWidgetDateRangeTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/ohrmWidgets/ohrmWidgetDateIntervalTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/ohrmWidgets/ohrmWidgetEmployeeListAutoFillTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/ohrmWidgets/ohrmWidgetEmployeeListTest.php');
 
         return $suite;
     }

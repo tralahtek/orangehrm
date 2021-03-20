@@ -1,8 +1,9 @@
 /**
-* @api {get} /organization 3.Get Organization Information
+* @api {get} /organization 03.Get Organization Information
 * @apiName getOrganization
 * @apiGroup Admin
 * @apiVersion 0.1.0
+* @apiUse AdminDescription
 *
 *
 * @apiSuccess  {int} id  Record id.

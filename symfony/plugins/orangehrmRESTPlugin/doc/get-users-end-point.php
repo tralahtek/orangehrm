@@ -1,8 +1,9 @@
 /**
-* @api {get} /user 1.Get Users
+* @api {get} /user 01.Get Users
 * @apiName getUsers
 * @apiGroup Admin
 * @apiVersion 0.1.0
+* @apiUse AdminDescription
 *
 * @apiParam  {Number} offset  Page number.
 * @apiParam  {Number} limit  Number of results per page.

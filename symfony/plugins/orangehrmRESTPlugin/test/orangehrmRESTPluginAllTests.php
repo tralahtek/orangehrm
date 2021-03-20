@@ -25,12 +25,14 @@ class orangehrmRESTPluginAllTests
     }
 
     public static function suite() {
-        $suite = new PHPUnit_Framework_TestSuite('orangehrmRESTPluginAllTest');
+        $suite = new PHPUnit\Framework\TestSuite('orangehrmRESTPluginAllTest');
 
         /* HTTP test Cases */
 
         $suite->addTestFile(dirname(__FILE__) . '/http/HttpResponseTest.php');
         $suite->addTestFile(dirname(__FILE__) . '/http/RequestParamsTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/http/RequestTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/http/JsonResponseTest.php');
 
         $suite->addTestFile(dirname(__FILE__) . '/api/ValidatorTest.php');
         /* API test cases */
@@ -46,6 +48,9 @@ class orangehrmRESTPluginAllTests
         $suite->addTestFile(dirname(__FILE__) . '/api/leave/ApiLeaveEntitlementAPITest.php');
         $suite->addTestFile(dirname(__FILE__) . '/api/leave/ApiLeaveTypeAPITest.php');
         $suite->addTestFile(dirname(__FILE__) . '/api/leave/ApiLeavePeriodAPITest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/api/leave/ApiLeaveRequestAPITest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/api/leave/model/ApiEmployeeLeaveRequestModelTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/api/leave/model/ApiLeaveListLeaveRequestModelTest.php');
 
         $suite->addTestFile(dirname(__FILE__) . '/api/pim/ApiCustomFieldAPITest1.php');
          $suite->addTestFile(dirname(__FILE__) . '/api/pim/ApiEmployeeCustomFieldAPITest.php');
@@ -70,15 +75,46 @@ class orangehrmRESTPluginAllTests
         $suite->addTestFile(dirname(__FILE__) . '/api/leave/entity/ApiLeaveTypeTest.php');
         $suite->addTestFile(dirname(__FILE__) . '/api/leave/entity/ApiLeaveRequestCommentTest.php');
         $suite->addTestFile(dirname(__FILE__) . '/api/leave/entity/ApiLeaveTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/api/leave/entity/ApiLeaveBalanceEntityTest.php');
         $suite->addTestFile(dirname(__FILE__) . '/api/admin/entity/ApiUserTest.php');
 
+        // Api/Model
+        $suite->addTestFile(dirname(__FILE__) . '/api/model/ModelTraitTest.php');
+
+        // Api/User
+        $suite->addTestFile(dirname(__FILE__) . '/api/user/ApiEmployeesAPITest.php');
+
+        // Api/User/Leave
+        $suite->addTestFile(dirname(__FILE__) . '/api/user/leave/ApiMyLeaveEntitlementAPITest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/api/user/leave/model/ApiLeaveEntitlementModelTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/api/user/leave/ApiMyLeaveRequestAPITest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/api/user/leave/ApiEmployeeLeaveRequestAPITest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/api/user/leave/model/ApiLeaveRequestModelTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/api/user/leave/ApiSubordinateLeaveEntitlementAPITest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/api/user/leave/ApiApplyLeaveRequestAPITest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/api/user/leave/ApiAssignLeaveRequestAPITest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/api/user/leave/service/APILeaveApplicationServiceTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/api/user/leave/service/APILeaveAssignmentServiceTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/api/user/leave/ApiLeaveAPITest.php');
+
+        // Api/User/Attendance
+        $suite->addTestFile(dirname(__FILE__) . '/api/user/attendance/ApiEmployeePunchInAPITest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/api/user/attendance/ApiEmployeePunchOutAPITest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/api/user/attendance/ApiEmployeePunchStatusAPITest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/api/user/attendance/model/EmployeeModelTest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/api/user/attendance/ApiAttendanceListAPITest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/api/user/attendance/ApiAttendanceAPITest.php');
+        $suite->addTestFile(dirname(__FILE__) . '/api/user/attendance/ApiAttendanceSummaryAPITest.php');
+
+        // Api/User/Time
+        $suite->addTestFile(dirname(__FILE__) . '/api/user/time/ApiTimeConfigAPITest.php');
+
+        // Api/User/Help
+        $suite->addTestFile(dirname(__FILE__) . '/api/user/help/ApiHelpAPITest.php');
+
+        // Api/PublicApi
+        $suite->addTestFile(dirname(__FILE__) . '/api/publicApi/ApiDefinitionAPITest.php');
 
         return $suite;
     }
-
-    public static function main() {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
-    }
 }
-
-

@@ -42,6 +42,7 @@ class LeaveRequest implements Serializable
     private $date;
     private $duration;
     private $days;
+    private $leaveBreakdown;
 
     /**
      * LeaveType constructor.
@@ -297,6 +298,22 @@ class LeaveRequest implements Serializable
         $this->days = $days;
     }
 
+    /**
+     * @return string
+     */
+    public function getLeaveBreakdown()
+    {
+        return $this->leaveBreakdown;
+    }
+
+    /**
+     * @param string $leaveBreakDown
+     */
+    public function setLeaveBreakdown($leaveBreakDown)
+    {
+        $this->leaveBreakdown = $leaveBreakDown;
+    }
+
 
     public function toArray()
     {
@@ -334,14 +351,14 @@ class LeaveRequest implements Serializable
         $this->setEmpId($leaveRequest->getEmpNumber());
         $this->setLeaveType($leaveRequest->getLeaveTypeName());
 
-        $commentsList = '';
+        $commentsList = [];
 
         if (!empty($leaveRequest->getLeaveRequestComment())) {
             foreach ($leaveRequest->getLeaveRequestComment() as $comment) {
                 $datetime = explode(" ", $comment->getCreated());
                 $leaveComment = new LeaveRequestComment($comment->getCreatedByName(), $datetime[0],
                     $datetime[1], $comment->getComments());
-                $commentsList = $leaveComment->toArray();
+                $commentsList[] = $leaveComment->toArray();
             }
         }
         $this->setComments($commentsList);
@@ -357,6 +374,7 @@ class LeaveRequest implements Serializable
         }
 
         $this->setDays($days);
+        $this->setLeaveBreakdown($leaveRequest->getLeaveBreakdown());
     }
 
 

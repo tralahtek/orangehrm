@@ -2,12 +2,13 @@ FROM php:7.3.15-apache-buster
 
 LABEL maintainer="samanthaj@orangehrm.com"
 
-ENV OHRM_VERSION 4.4
-ENV OHRM_MD5 a4ee1052977a28c1262ea27b073c22f3
-ENV IONCUBE_MD5 431155d4a1b4d1b6a651c9c65476ef58
+ENV OHRM_VERSION 4.8
+ENV OHRM_MD5 55c9a4657334ad6051f009a8a41fad02
+ENV IONCUBE_MD5 1e6b0d8a8db6c5536c99bd7e67eb6a4f
+ENV IONCUBE_VER '10.4.4'
 
 RUN set -ex; \
-    curl -fSL -o ioncube.tar.gz "https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz"; \
+    curl -fSL -o ioncube.tar.gz "https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64_${IONCUBE_VER}.tar.gz"; \
     echo "${IONCUBE_MD5} ioncube.tar.gz" | md5sum -c -; \
     tar -xvvzf ioncube.tar.gz; \
     mv ioncube/ioncube_loader_lin_7.3.so `php-config --extension-dir`; \
@@ -80,3 +81,5 @@ RUN { \
 	if command -v a2enmod; then \
 		a2enmod rewrite; \
 	fi;
+
+VOLUME ["/var/www/html"]

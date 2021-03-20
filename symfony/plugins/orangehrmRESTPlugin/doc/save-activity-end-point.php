@@ -1,8 +1,9 @@
 /**
-* @api {post} /activity 6.Save Activity
+* @api {post} /activity 06.Save Activity
 * @apiName saveActivity
 * @apiGroup Time
 * @apiVersion 0.1.0
+* @apiUse AdminDescription
 *
 *
 * @apiParam  {Number} projectId  Project id.

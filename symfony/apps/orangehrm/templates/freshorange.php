@@ -15,6 +15,7 @@ $subscribed = $sf_user->isSubscribed();
                 <a href="http://www.orangehrm.com/" target="_blank"><img src="<?php echo theme_path('images/logo.png')?>" width="283" height="56" alt="OrangeHRM"/></a>
                 <a href="#" id="welcome" class="panelTrigger"><?php echo __("Welcome %username%", array("%username%" => $sf_user->getAttribute('auth.firstName'))); ?></a>
                 <?php include_component('buzz', 'viewNotification'); ?>
+                <?php include_component('help', 'viewHelp'); ?>
                 <?php if(!$subscribed) { ?>
                     <div id="MP_btn">
                         <input id="Subscriber_link" type="button" class="button" value="<?php echo __('Subscribe'); ?>"/>
@@ -34,6 +35,7 @@ $subscribed = $sf_user->isSubscribed();
                 <div id="welcome-menu" class="panelContainer">
                     <ul>
                         <li><?php include_component('communication', 'beaconAbout'); ?></li>
+                        <li><a href="<?php echo url_for('support/index'); ?>"><?php echo __('Support'); ?></a></li>
                         <li><a href="<?php echo url_for('admin/changeUserPassword'); ?>"><?php echo __('Change Password'); ?></a></li>
                         <li><a href="<?php echo url_for('auth/logout'); ?>"><?php echo __('Logout'); ?></a></li>
                     </ul>

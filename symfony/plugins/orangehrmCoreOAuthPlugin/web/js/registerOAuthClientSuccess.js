@@ -14,6 +14,10 @@ $(document).ready(function() {
 
     });
 
+    $("#resultTable tr td:first-child").not($("td:has(input)")).parent().find('a').css({
+        "text-decoration": "none",
+        "cursor": "default"
+    });
 
     $('#btnCancel').click(function() {
         $('#openid').hide();
@@ -87,16 +91,16 @@ $(document).ready(function() {
         },
         messages: {
             'oauth[client_id]': {
-                required: "Required",
-                maxlength: "Max Length 80"
+                required: lang_required,
+                maxlength: lang_LengthExceeded80
 
             },
             'oauth[client_secret]': {
-                required: "Required",
-                maxlength: "Max Length 80"
+                required: lang_required,
+                maxlength: lang_LengthExceeded80
             },
             'oauth[redirect_uri]': {
-                maxlength: "Max Length 2000"
+                maxlength: lang_LengthExceeded2000
             }
 
         }

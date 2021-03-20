@@ -16,36 +16,68 @@
  * if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA  02110-1301, USA
  */
-use Orangehrm\Rest\Http\Request;
-use Orangehrm\Rest\Http\Response;
-use Orangehrm\Rest\Api\Exception\RecordNotFoundException;
+
+use Orangehrm\Rest\Api\Exception\BadRequestException;
 use Orangehrm\Rest\Api\Exception\InvalidParamException;
 use Orangehrm\Rest\Api\Exception\NotImplementedException;
-use Orangehrm\Rest\Api\Exception\BadRequestException;
+use Orangehrm\Rest\Api\Exception\RecordNotFoundException;
 use Orangehrm\Rest\Api\Validator;
+use Orangehrm\Rest\Http\Request;
+use Orangehrm\Rest\Http\Response;
+use Orangehrm\Rest\Service\ApiUsageService;
+use OpenApi\Annotations as OA;
 
+/**
+ * @OA\OpenApi(openapi="3.0.3")
+ * @OA\Info(
+ *     title="OrangeHRM Open Source : REST api docs",
+ *     version="1.3.0",
+ *     x={
+ *         "base-path": "/api/v1"
+ *     }
+ * )
+ * @OA\Server(
+ *     url="{schema}://{your-orangehrm-host}/{basePath}",
+ *     variables={@OA\ServerVariable(serverVariable="schema",default="https",enum={"https","http"}),
+ *     @OA\ServerVariable(serverVariable="your-orangehrm-host",default="your-orangehrm-host"),
+ *     @OA\ServerVariable(serverVariable="basePath",default="api/v1")}
+ * )
+ * @OA\Server(
+ *     url="{schema}://{your-orangehrm-host}",
+ *     variables={@OA\ServerVariable(serverVariable="schema",default="https",enum={"https","http"}),
+ *     @OA\ServerVariable(serverVariable="your-orangehrm-host",default="your-orangehrm-host")}
+ * )
+ *
+ * @OA\SecurityScheme(
+ *     securityScheme="OAuth",
+ *     type="oauth2",
+ *     flows={@OA\Flow(flow="password",tokenUrl="./oauth/issueToken",scopes={"admin":"Privileged APIs","user":"User scope APIs"})}
+ * )
+ *
+ * @OA\Tag(name="Leave")
+ * @OA\Tag(name="Attendance")
+ * @OA\Tag(name="Time")
+ * @OA\Schema(
+ *     schema="RecordNotFoundException",
+ *     type="object",
+ *     example={"error":{"status":"404","text":"No Records Found"}}
+ * )
+ */
 abstract class baseRestAction extends baseOAuthAction {
 
     protected $getValidationRule = array();
     protected $postValidationRule = array();
     protected $putValidationRule = array();
     protected $deleteValidationRule = array();
+    protected $apiUsageService = null;
 
     /**
      * Check token validation
      */
     public function preExecute() {
-
-
         parent::preExecute();
-
-        $server = $this->getOAuthServer();
-        $oauthRequest = $this->getOAuthRequest();
-        $oauthResponse = $this->getOAuthResponse();
-        if (!$server->verifyResourceRequest($oauthRequest, $oauthResponse)) {
-            $server->getResponse()->send();
-            exit;
-        }
+        $this->verifyAllowedScope();
+        $this->getApiUsageService()->persistApiRequestMetaData($this->getAccessTokenData(), $this->getRequest());
     }
 
     protected function init(Request $request){
@@ -101,11 +133,10 @@ abstract class baseRestAction extends baseOAuthAction {
     }
 
     /**
-     * @param sfRequest $request
+     * @param sfWebRequest $request
      * @return string
      */
     public function execute($request) {
-
         $httpRequest = new Request($request);
         $this->init($httpRequest);
         $response = $this->getResponse();
@@ -129,6 +160,8 @@ abstract class baseRestAction extends baseOAuthAction {
                 case 'DELETE':
                     $response->setContent($this->handleDeleteRequest($httpRequest)->format());
                     break;
+                default:
+                    throw new NotImplementedException();
             }
 
         } catch (RecordNotFoundException $e){
@@ -160,6 +193,32 @@ abstract class baseRestAction extends baseOAuthAction {
 
 
         return sfView::NONE;
+    }
+
+    /**
+     * Check allowed scopes. By default check `privileged` for non-mobile endpoints
+     * @throws sfStopException
+     */
+    public function verifyAllowedScope()
+    {
+        $oauthRequest = $this->getOAuthRequest();
+        $oauthResponse = $this->getOAuthResponse();
+        if (!$this->getOAuthServer()->verifyResourceRequest(
+            $oauthRequest,
+            $oauthResponse,
+            Scope::SCOPE_ADMIN
+        )) {
+            $oauthResponse->send();
+            throw new sfStopException();
+        }
+    }
+
+    public function getApiUsageService()
+    {
+        if (is_null($this->apiUsageService)) {
+            $this->apiUsageService = new ApiUsageService();
+        }
+        return $this->apiUsageService;
     }
 }
 

@@ -1,8 +1,9 @@
 /**
-* @api {post} /employee/:id/punch-in 1.Punch In
+* @api {post} /employee/:id/punch-in 01.Punch In
 * @apiName punchIn
 * @apiGroup Attendance
 * @apiVersion 0.1.0
+* @apiUse AdminDescription
 *
 *
 * @apiParam   {Number} id  Employee id.

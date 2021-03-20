@@ -1,8 +1,9 @@
 /**
-* @api {put} /customer 3.Update Customer
+* @api {put} /customer 03.Update Customer
 * @apiName updateCustomer
 * @apiGroup Time
 * @apiVersion 0.1.0
+* @apiUse AdminDescription
 *
 *
 * @apiParam  {Number} customerId  Customer Id.

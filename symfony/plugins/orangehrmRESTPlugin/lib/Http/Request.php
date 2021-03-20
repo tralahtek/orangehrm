@@ -23,12 +23,15 @@ class Request{
 
     protected $actionRequest;
 
+    /**
+     * @param \sfWebRequest $request
+     */
     public function __construct($request){
         $this->actionRequest = $request;
     }
 
     /**
-     * @return mixed
+     * @return \sfWebRequest
      */
     public function getActionRequest()
     {
@@ -36,27 +39,46 @@ class Request{
     }
 
     /**
-     * @param mixed $actionRequest
+     * @param \sfWebRequest $actionRequest
      */
     public function setActionRequest($actionRequest)
     {
         $this->actionRequest = $actionRequest;
     }
 
+    /**
+     * @return string
+     */
     public function getMethod(){
         return $this->getActionRequest()->getMethod();
     }
 
     /**
+     * @return array|null
+     */
+    public function getPostParameters()
+    {
+        if ($this->isJsonHttpRequest()) {
+            return json_decode($this->getActionRequest()->getContent(), true);
+        } else {
+            // `application/x-www-form-urlencoded` already handled in sfWebRequest
+            return $this->getActionRequest()->getPostParameters();
+        }
+    }
+
+    /**
      * @return array
      */
-    public function getAllParameters() {
-        return array_merge($this->getActionRequest()->getGetParameters(),
-            $this->getActionRequest()->getPostParameters(),
-            array('id'=>$this->getActionRequest()->getParameter('id'))
-            );
-
+    public function getAllParameters()
+    {
+        $postParameters = $this->getPostParameters();
+        return array_merge(
+            $this->getActionRequest()->getGetParameters(),
+            is_array($postParameters) ? $postParameters : [],
+            array('id' => $this->getActionRequest()->getParameter('id'))
+        );
     }
+
     /**
      * Checks if the request method is the given one.
      *
@@ -67,5 +89,14 @@ class Request{
     public function isMethod($method)
     {
         return strtoupper($method) == $this->getActionRequest()->getMethod();
+    }
+
+    /**
+     * Check whether HTTP request `application/json`
+     * @return bool
+     */
+    public function isJsonHttpRequest()
+    {
+        return $this->getActionRequest()->getContentType() === 'application/json';
     }
 }

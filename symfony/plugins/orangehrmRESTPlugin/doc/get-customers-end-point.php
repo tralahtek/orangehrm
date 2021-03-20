@@ -1,8 +1,9 @@
 /**
-* @api {get} /customer 1.Get Customers
+* @api {get} /customer 01.Get Customers
 * @apiName getCustomers
 * @apiGroup Time
 * @apiVersion 0.1.0
+* @apiUse AdminDescription
 *
 *
 * @apiSuccess  {Number} customerId  Customer Id.

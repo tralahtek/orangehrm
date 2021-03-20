@@ -1,8 +1,9 @@
 /**
-* @api {post} /employee/:id/leave-request 6.Save Leave Single Day Request
+* @api {post} /employee/:id/leave-request 06.Save Leave Single Day Request
 * @apiName saveLeaveRequest
 * @apiGroup Leave
 * @apiVersion 0.1.0
+* @apiUse AdminDescription
 *
 * @apiParam   {Number} id Employee id.
 * @apiParam   {Number} type Mandatory leave type id.

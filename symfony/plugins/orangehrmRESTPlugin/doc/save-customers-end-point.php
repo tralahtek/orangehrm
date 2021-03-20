@@ -1,8 +1,9 @@
 /**
-* @api {post} /customer 2.Save Customer
+* @api {post} /customer 02.Save Customer
 * @apiName saveCustomer
 * @apiGroup Time
 * @apiVersion 0.1.0
+* @apiUse AdminDescription
 *
 * @apiParam  {String} name  Customer name.
 * @apiParam  {String} description  Description.

@@ -1,8 +1,9 @@
 /**
-* @api {get} /leave/period 3.Get Leave Period
+* @api {get} /leave/period 03.Get Leave Period
 * @apiName getLeavePeriods
 * @apiGroup Leave
 * @apiVersion 0.1.0
+* @apiUse AdminDescription
 *
 *
 *

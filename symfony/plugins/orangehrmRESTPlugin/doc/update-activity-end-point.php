@@ -1,8 +1,9 @@
 /**
-* @api {put} /activity 7.Update Activity
+* @api {put} /activity 07.Update Activity
 * @apiName updateActivity
 * @apiGroup Time
 * @apiVersion 0.1.0
+* @apiUse AdminDescription
 *
 *
 * @apiParam  {Number} projectId  Project id.
